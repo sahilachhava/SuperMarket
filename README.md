@@ -1,9 +1,8 @@
 # SuperMarket
 
 **Developed in 2020** <br />
-for college project <br /><br />
 
-*This super market project is developed for college project, it is purely based on C++*<br />
+*This project is developed for learning purpose, it was developed in C++*<br />
 
 **Screenshots**
 
