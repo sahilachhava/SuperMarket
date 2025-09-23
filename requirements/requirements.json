@@ -1,0 +1,138 @@
+{
+  "expand": "schema,names",
+  "startAt": 0,
+  "maxResults": 5,
+  "total": 5,
+  "issues": [
+    {
+      "id": "1",
+      "key": "REQ-DOC-001",
+      "fields": {
+        "summary": "Product inventory management system",
+        "issuetype": {
+          "id": "1",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "System shall manage product inventory with search, stock tracking, and warehouse operations",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "2",
+      "key": "REQ-DOC-002",
+      "fields": {
+        "summary": "Order processing for buy and sell transactions",
+        "issuetype": {
+          "id": "1",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "System shall process buy and sell orders with multi-product support and stock validation",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "3",
+      "key": "REQ-DOC-003",
+      "fields": {
+        "summary": "Employee salary payment system",
+        "issuetype": {
+          "id": "1",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "System shall calculate and pay employee wages based on time intervals with rate validation",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "4",
+      "key": "REQ-DOC-004",
+      "fields": {
+        "summary": "Financial reporting and analytics",
+        "issuetype": {
+          "id": "1",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "System shall provide financial overview with expenses, revenue, profits, and order history tracking",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "5",
+      "key": "REQ-DOC-005",
+      "fields": {
+        "summary": "Console-based user interface with validation",
+        "issuetype": {
+          "id": "1",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "System shall provide formatted console interface with menu navigation and input validation",
+        "verifiableByCodeOnly": true
+      }
+    }
+  ]
+}
