@@ -137,6 +137,129 @@ void SSNMart::addNewOrder(Inventory* _newOrder)
 	delete[] tempOrders;
 }
 
+bool SSNMart::createNewOrder(string _orderType)
+{
+    Utility::headerUI("*******" + string(29, ' ') + _orderType + " Products" + string(28, ' ') + "*******");
+    int *productIDs = new int[10], *productQtys = new int[10];
+
+    int totalSelected = 0, index = 0, flag = 0, newOrderID = 0;
+    double totalSellPrice;
+
+    Products** products = warehouse->getAllProducts();
+
+    cout << "*******" << string(7, ' ') << "ID" << setw(20) << "Name" << setw(20) << "Stock" << setw(14) << "Price" << setw(14) << "*******" << endl;
+    for (int index = 0; index < warehouse->getTotalNumberOfProducts(); index++) {
+        cout << "*******" << string(6, ' ') << products[index]->getProductID() << setw(20) << products[index]->getProductName() << setw(17) << products[index]->getProductStock() << setw(13) << "$" << products[index]->getProductPrice() << setw(15) << "*******" << endl;
+    }
+    cout << string(84, '*') << endl << endl;
+
+    if (_orderType == "Sell") {
+        int selectOption = Utility::getMenuChoice(0, 1, "Select Product?\nIf by ID: Press (1), If By Name: Press (0) -> ", "Error: Please Enter Valid Option");
+
+        do {
+            Utility::getString(""); //works as cin.ignore();
+            if (selectOption == 1) {
+                productIDs[index] = Utility::getMenuChoice(1001, warehouse->getTotalNumberOfProducts() + 1000, string(25, ' ') + "Enter Product ID -> ", string(25, ' ') + "Error: Enter valid product ID");
+            }
+            else {
+                while (true) {
+                    productIDs[index] = getProductIDByName(Utility::getString(string(25, ' ') + "Enter Product Name -> "));
+                    if (productIDs[index] == 0) {
+                        cout << string(25, ' ') << "Error: Product Doesn't Exists" << endl;
+                    }
+                    else {
+                        break;
+                    }
+                }
+            }
+
+            productQtys[index] = Utility::getMenuChoice(1, products[productIDs[index] - 1001]->getProductStock(), string(25, ' ') + "Enter Product Qty -> ", string(25, ' ') + "Error: Enter valid stock (Stock: " + to_string(products[productIDs[index] - 1001]->getProductStock()) + ")");
+
+            totalSelected++;
+
+            unsigned int _newStock = products[productIDs[index] - 1001]->getProductStock() - productQtys[index];
+            products[productIDs[index] - 1001]->setProductStock(_newStock);
+
+            flag = Utility::getMenuChoice(0, 1, "Sell more? If Yes: Press (1), If No: Press (0) -> ", string(25, ' ') + "Error: Please Enter Valid Option");
+
+            if (flag == 0) {
+                break;
+            }
+            else {
+                if (totalSelected == 10) {
+                    cout << string(25, ' ') << "The Maximum Select Limit of 10 Products is Exceeeded.!" << endl;
+                    break;
+                }
+                else {
+                    index++;
+                }
+            }
+        } while (true);
+
+        totalSellPrice = Utility::getDouble(string(25, ' ') + "Enter Combo Sell Price -> ");
+        newOrderID = totalOrders + 101;
+        Inventory* _newOrder = new Inventory(newOrderID, "Sell", totalSelected, productIDs, productQtys, totalSellPrice);
+        addNewOrder(_newOrder);
+        return true;
+    }
+    else if (_orderType == "Buy") {
+        double totalBuyPrice = 0;
+        int selectOption = Utility::getMenuChoice(0, 1, "Select Product?\nIf by ID: Press (1), If By Name: Press (0) -> ", "Error: Please Enter Valid Option");
+
+        do {
+            Utility::getString(""); //works as cin.ignore();
+            if (selectOption == 1) {
+                productIDs[index] = Utility::getMenuChoice(1001, warehouse->getTotalNumberOfProducts() + 1000, string(25, ' ') + "Enter Product ID -> ", string(25, ' ') + "Error: Enter valid product ID");
+            }
+            else {
+                while (true) {
+                    productIDs[index] = getProductIDByName(Utility::getString(string(25, ' ') + "Enter Product Name -> "));
+                    if (productIDs[index] == 0) {
+                        cout << string(25, ' ') << "Error: Product Doesn't Exists" << endl;
+                    }
+                    else {
+                        break;
+                    }
+                }
+            }
+
+            productQtys[index] = Utility::getInt(string(20, ' ') + "Enter Product Qty (Stock: " + to_string(products[productIDs[index] - 1001]->getProductStock()) + ") -> ");
+
+            totalSelected++;
+
+            //Updating New Stock
+            unsigned int _newStock = products[productIDs[index] - 1001]->getProductStock() + productQtys[index];
+            products[productIDs[index] - 1001]->setProductStock(_newStock);
+
+            //Calculating Buying Price
+            totalBuyPrice += products[productIDs[index] - 1001]->getProductPrice() * productQtys[index];
+
+            flag = Utility::getMenuChoice(0, 1, "Buy more? If Yes : Press (1), If No : Press (0) -> ", string(25, ' ') + "Error: Please Enter Valid Option");
+
+            if (flag == 0) {
+                break;
+            }
+            else {
+                if (totalSelected == 10) {
+                    cout << string(25, ' ') << "The Maximum Select Limit of 10 Products is Exceeeded.!" << endl;
+                    break;
+                }
+                else {
+                    index++;
+                }
+            }
+        } while (true);
+
+        newOrderID = totalOrders + 101;
+        Inventory* _newOrder = new Inventory(newOrderID, "Buy", totalSelected, productIDs, productQtys, totalBuyPrice);
+        addNewOrder(_newOrder);
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 void SSNMart::searchProduct()
 {
     Utility::headerUI("*******" + string(27, ' ') + "Search Product" + string(25, ' ') + "*******");
